@@ -78,7 +78,7 @@ type DexClient interface {
 	RefundHTLT(swapID []byte, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
 	TransferTokenOwnership(symbol string, newOwner types.AccAddress, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
 
-	Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
+	Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, sideChainId string, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
 	Unbind(symbol string, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
 	TransferOut(to msg.SmartChainAddress, amount types.Coin, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error)
 
@@ -897,14 +897,14 @@ func (c *HTTP) TransferOut(to msg.SmartChainAddress, amount types.Coin, expireTi
 	return c.Broadcast(transferOutMsg, syncType, options...)
 }
 
-func (c *HTTP) Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error) {
+func (c *HTTP) Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, sideChainId string, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error) {
 	if c.key == nil {
 		return nil, KeyMissingError
 	}
 
 	fromAddr := c.key.GetAddr()
 
-	bindMsg := msg.NewBindMsg(fromAddr, symbol, amount, contractAddress, contractDecimals, expireTime)
+	bindMsg := msg.NewBindMsg(fromAddr, symbol, amount, contractAddress, contractDecimals, sideChainId, expireTime)
 
 	return c.Broadcast(bindMsg, syncType, options...)
 }

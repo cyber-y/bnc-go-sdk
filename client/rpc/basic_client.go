@@ -16,7 +16,7 @@ import (
 	"github.com/binance-chain/go-sdk/types/tx"
 )
 
-var DefaultTimeout = 5 * time.Second
+var DefaultTimeout = 30 * time.Second
 
 type ABCIClient interface {
 	// Reading from abci app
