@@ -897,14 +897,14 @@ func (c *HTTP) TransferOut(to msg.SmartChainAddress, amount types.Coin, expireTi
 	return c.Broadcast(transferOutMsg, syncType, options...)
 }
 
-func (c *HTTP) Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, sideChainId string, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error) {
+func (c *HTTP) Bind(symbol string, amount int64, contractAddress msg.SmartChainAddress, contractDecimals int8, expireTime int64, syncType SyncType, options ...tx.Option) (*core_types.ResultBroadcastTx, error) {
 	if c.key == nil {
 		return nil, KeyMissingError
 	}
 
 	fromAddr := c.key.GetAddr()
 
-	bindMsg := msg.NewBindMsg(fromAddr, symbol, amount, contractAddress, contractDecimals, sideChainId, expireTime)
+	bindMsg := msg.NewBindMsg(fromAddr, symbol, amount, contractAddress, contractDecimals, expireTime)
 
 	return c.Broadcast(bindMsg, syncType, options...)
 }
