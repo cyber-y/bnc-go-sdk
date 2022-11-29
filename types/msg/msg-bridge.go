@@ -74,11 +74,10 @@ type BindMsg struct {
 	Amount           int64             `json:"amount"`
 	ContractAddress  SmartChainAddress `json:"contract_address"`
 	ContractDecimals int8              `json:"contract_decimals"`
-	SideChainId      string            `json:"side_chain_id"`
 	ExpireTime       int64             `json:"expire_time"`
 }
 
-func NewBindMsg(from sdk.AccAddress, symbol string, amount int64, contractAddress SmartChainAddress, contractDecimals int8, sideChainId string, expireTime int64) BindMsg {
+func NewBindMsg(from sdk.AccAddress, symbol string, amount int64, contractAddress SmartChainAddress, contractDecimals int8, expireTime int64) BindMsg {
 	return BindMsg{
 		From:             from,
 		Amount:           amount,
@@ -86,7 +85,6 @@ func NewBindMsg(from sdk.AccAddress, symbol string, amount int64, contractAddres
 		ContractAddress:  contractAddress,
 		ContractDecimals: contractDecimals,
 		ExpireTime:       expireTime,
-		SideChainId:      sideChainId,
 	}
 }
 
