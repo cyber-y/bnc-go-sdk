@@ -371,10 +371,11 @@ func (p *SlashParams) UpdateCheck() error {
 type StakeParams struct {
 	UnbondingTime time.Duration `json:"unbonding_time"`
 
-	MaxValidators       uint16 `json:"max_validators"`        // maximum number of validators
-	BondDenom           string `json:"bond_denom"`            // bondable coin denomination
-	MinSelfDelegation   int64  `json:"min_self_delegation"`   // the minimal self-delegation amount
-	MinDelegationChange int64  `json:"min_delegation_change"` // the minimal delegation amount changed
+	MaxValidators               uint16 `json:"max_validators"`                 // maximum number of validators
+	BondDenom                   string `json:"bond_denom"`                     // bondable coin denomination
+	MinSelfDelegation           int64  `json:"min_self_delegation"`            // the minimal self-delegation amount
+	MinDelegationChange         int64  `json:"min_delegation_change"`          // the minimal delegation amount changed
+	RewardDistributionBatchSize int64  `json:"reward_distribution_batch_size"` //the reward_distribution_batch_size should be in range 1000 to 5000
 }
 
 func (p *StakeParams) GetParamAttribute() (string, bool) {
